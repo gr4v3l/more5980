@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击生成 5980</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0a0a0f;
+            overflow: hidden;
+            cursor: crosshair;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .hint {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 24px;
+            pointer-events: none;
+            transition: opacity 0.5s;
+            z-index: 0;
+        }
+
+        .text-item {
+            position: fixed;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 1;
+            white-space: nowrap;
+        }
+
+        /* 动画定义 */
+        @keyframes fadeUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
+        }
+
+        @keyframes fadeDown {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(80px) scale(0.8); }
+        }
+
+        @keyframes zoomInOut {
+            0% { opacity: 0; transform: scale(0.3); }
+            30% { opacity: 1; transform: scale(1.3); }
+            100% { opacity: 0; transform: scale(2); }
+        }
+
+        @keyframes spinOut {
+            0% { opacity: 1; transform: rotate(0deg) scale(1); }
+            100% { opacity: 0; transform: rotate(360deg) scale(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { opacity: 1; transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); opacity: 0; }
+        }
+
+        @keyframes glow {
+            0% { opacity: 0; text-shadow: 0 0 0 currentColor; }
+            50% { opacity: 1; text-shadow: 0 0 30px currentColor, 0 0 60px currentColor; }
+            100% { opacity: 0; text-shadow: 0 0 0 currentColor; transform: scale(1.5); }
+        }
+
+        @keyframes fall {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(200px) rotate(15deg); }
+        }
+
+        @keyframes bounce {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+
+        @keyframes slideLeft {
+            0% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(-100px); }
+        }
+
+        @keyframes slideRight {
+            0% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(100px); }
+        }
+
+        .anim-fadeUp { animation: fadeUp 1.5s ease-out forwards; }
+        .anim-fadeDown { animation: fadeDown 1.5s ease-in forwards; }
+        .anim-zoomInOut { animation: zoomInOut 1.2s ease-out forwards; }
+        .anim-spinOut { animation: spinOut 1.2s ease-in forwards; }
+        .anim-shake { animation: shake 0.8s ease-in-out forwards; }
+        .anim-glow { animation: glow 1.5s ease-in-out forwards; }
+        .anim-fall { animation: fall 2s ease-in forwards; }
+        .anim-bounce { animation: bounce 0.8s ease-out forwards; }
+        .anim-slideLeft { animation: slideLeft 1.2s ease-in forwards; }
+        .anim-slideRight { animation: slideRight 1.2s ease-in forwards; }
+    </style>
+</head>
+<body>
+    <div class="hint" id="hint">点击屏幕任意位置生成 5980</div>
+
+    <script>
+        const fonts = [
+            'Arial', 'Georgia', 'Verdana', 'Times New Roman',
+            'Courier New', 'Impact', 'Comic Sans MS', 'Trebuchet MS',
+            'Palatino', 'Garamond', 'Bookman', 'Arial Black',
+            'Tahoma', 'Lucida Console', 'sans-serif', 'serif',
+            'cursive', 'fantasy', 'monospace'
+        ];
+
+        const colors = [
+            '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4',
+            '#ffeaa7', '#dfe6e9', '#fd79a8', '#a29bfe',
+            '#00b894', '#e17055', '#74b9ff', '#ff7675',
+            '#55efc4', '#fdcb6e', '#e84393', '#6c5ce7',
+            '#00cec9', '#fab1a0', '#81ecec', '#ffd32a',
+            '#ff3838', '#3ae374', '#17c0eb', '#7d5fff',
+            '#ff9ff3', '#feca57', '#48dbfb', '#1dd1a1'
+        ];
+
+        const animations = [
+            'anim-fadeUp', 'anim-fadeDown', 'anim-zoomInOut',
+            'anim-spinOut', 'anim-shake', 'anim-glow',
+            'anim-fall', 'anim-bounce', 'anim-slideLeft',
+            'anim-slideRight'
+        ];
+
+        const hint = document.getElementById('hint');
+        let firstClick = true;
+
+        function random(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        document.addEventListener('click', (e) => {
+            if (firstClick) {
+                hint.style.opacity = '0';
+                firstClick = false;
+            }
+
+            const text = document.createElement('div');
+            text.className = 'text-item ' + random(animations);
+            text.textContent = '5980';
+
+            // 随机字体
+            text.style.fontFamily = random(fonts);
+            
+            // 随机颜色
+            const color = random(colors);
+            text.style.color = color;
+            
+            // 随机大小 (24px - 72px)
+            const fontSize = randomInt(24, 72);
+            text.style.fontSize = fontSize + 'px';
+            
+            // 随机位置偏移
+            const offsetX = randomInt(-30, 30);
+            const offsetY = randomInt(-30, 30);
+            text.style.left = (e.clientX + offsetX) + 'px';
+            text.style.top = (e.clientY + offsetY) + 'px';
+            
+            // 随机旋转角度
+            const rotation = randomInt(-30, 30);
+            text.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+            
+            // 随机字重
+            text.style.fontWeight = Math.random() > 0.5 ? 'bold' : 'normal';
+            
+            // 随机字体样式
+            text.style.fontStyle = Math.random() > 0.8 ? 'italic' : 'normal';
+
+            // 随机字母间距
+            text.style.letterSpacing = randomInt(0, 8) + 'px';
+
+            document.body.appendChild(text);
+
+            // 动画结束后移除元素
+            setTimeout(() => {
+                text.remove();
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
